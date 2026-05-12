@@ -1,0 +1,1061 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<title>Maksym Syromolot — Full-Stack Developer</title>
+<meta name="description" content="Maksym Syromolot. Full-stack developer in Toronto. Java, TypeScript, React, Node. Selected work, experience, and contact." />
+<meta name="author" content="Maksym Syromolot" />
+<meta property="og:title" content="Maksym Syromolot — Full-Stack Developer" />
+<meta property="og:description" content="Full-stack developer in Toronto. Java, TypeScript, React, Node. Selected work and experience." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/><text x=%2250%22 y=%2272%22 font-family=%22monospace%22 font-size=%2270%22 fill=%22%23ff5722%22 text-anchor=%22middle%22 font-weight=%22700%22>m</text></svg>" />
+<style>
+  /* ---------- design tokens ---------- */
+  :root{
+    --bg: #0a0908;
+    --bg-elev: #131210;
+    --paper: #ece6d8;
+    --paper-dim: #a8a297;
+    --paper-mute: #5d574d;
+    --rule: #211e1a;
+    --rule-strong: #2e2a25;
+    --ember: #ff5722;
+    --ember-soft: rgba(255,87,34,0.14);
+    --signal: #d4e36b;
+
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+
+    --maxw: 1320px;
+    --pad: clamp(20px, 4vw, 56px);
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x:hidden;
+  }
+  /* film-grain overlay */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index: 100;
+    opacity:.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
+  }
+  /* subtle radial vignette */
+  body::after{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index: 99;
+    background: radial-gradient(120% 80% at 50% 0%, transparent 40%, rgba(0,0,0,0.55) 100%);
+  }
+  ::selection{ background: var(--ember); color: var(--bg); }
+
+  a{color:inherit; text-decoration:none}
+  img{display:block; max-width:100%}
+  button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+
+  /* ---------- top status bar ---------- */
+  .bar{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10,9,8,0.78);
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .bar-inner{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 10px var(--pad);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    color: var(--paper-dim);
+  }
+  .bar .dot{
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    background: var(--signal);
+    box-shadow: 0 0 8px var(--signal);
+    margin-right: 8px;
+    vertical-align: 1px;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:.4} }
+  .bar .right{ text-align:right }
+  .bar .center{ color: var(--paper); font-weight: 500 }
+  @media (max-width: 640px){
+    .bar-inner{ grid-template-columns: 1fr 1fr; }
+    .bar .center{ display:none }
+  }
+
+  /* ---------- layout ---------- */
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+  section{ position: relative; padding: clamp(64px, 9vw, 140px) 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type{ border-bottom: 0 }
+
+  .section-head{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    margin-bottom: clamp(36px, 5vw, 64px);
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-num{
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+  }
+  .section-title{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(34px, 5.4vw, 72px);
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+    margin: 6px 0 0;
+    color: var(--paper);
+  }
+  .section-meta{
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--paper-mute);
+    text-transform: uppercase;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: clamp(40px, 7vw, 88px) 0 clamp(56px, 8vw, 120px);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .hero-grid{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+    display: grid;
+    grid-template-columns: 1.35fr 0.9fr;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: start;
+  }
+  @media (max-width: 900px){
+    .hero-grid{ grid-template-columns: 1fr; gap: 36px }
+  }
+
+  .kicker{
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    margin-bottom: 22px;
+  }
+  .kicker .bracket{ color: var(--ember) }
+
+  .hero-name{
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(56px, 11vw, 168px);
+    line-height: 0.86;
+    letter-spacing: -0.045em;
+    margin: 0;
+    color: var(--paper);
+    /* characters reveal on load */
+  }
+  .hero-name .lo{ display:block }
+  .hero-name .lo:last-child{ color: var(--ember); position: relative }
+  .hero-name .lo:last-child::after{
+    content:"_";
+    color: var(--ember);
+    animation: blink 1.05s steps(2,end) infinite;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+  @keyframes blink{ 50%{opacity:0} }
+
+  .hero-tag{
+    margin-top: clamp(20px, 3vw, 32px);
+    max-width: 56ch;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.25;
+    color: var(--paper);
+    letter-spacing: -0.005em;
+  }
+  .hero-tag em{ color: var(--ember); font-style: italic }
+
+  .hero-meta{
+    margin-top: clamp(28px, 4vw, 44px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 18px 28px;
+    max-width: 520px;
+    border-top: 1px solid var(--rule);
+    padding-top: 22px;
+  }
+  @media (max-width: 480px){
+    .hero-meta{ grid-template-columns: 1fr }
+  }
+  .hero-meta dt{
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    margin-bottom: 4px;
+  }
+  .hero-meta dd{
+    margin: 0;
+    font-size: 14px;
+    color: var(--paper);
+    font-weight: 500;
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .hero-meta a:hover{ color: var(--ember) }
+
+  /* ASCII gif panel */
+  .ascii-panel{
+    position: relative;
+    border: 1px solid var(--rule-strong);
+    background: linear-gradient(180deg, #0c0b0a 0%, #080706 100%);
+    padding: 14px 14px 14px;
+    border-radius: 2px;
+  }
+  .ascii-frame{
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: #050403;
+    overflow: hidden;
+    border: 1px solid #1a1814;
+  }
+  .ascii-frame img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+    /* GIF goes dark→bright; let it breathe with a subtle glow */
+    filter: contrast(1.05) brightness(1.02);
+    image-rendering: pixelated;
+  }
+  /* placeholder shown if gif fails / missing */
+  .ascii-fallback{
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    color: var(--paper-mute);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 24px;
+    line-height: 1.7;
+    background:
+      repeating-linear-gradient( 90deg, transparent 0 6px, rgba(255,255,255,0.012) 6px 7px),
+      repeating-linear-gradient( 0deg, transparent 0 6px, rgba(255,255,255,0.012) 6px 7px),
+      #050403;
+  }
+  .ascii-fallback span{ display:block; color: var(--ember); margin-top: 8px; font-weight:500 }
+  .ascii-scan{
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient( 0deg,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px,
+      transparent 3px);
+    mix-blend-mode: overlay;
+  }
+  .ascii-caption{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+  .ascii-caption .id{ color: var(--ember) }
+  .ascii-caption .rule{ height:1px; background: var(--rule-strong) }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: start;
+  }
+  @media (max-width: 800px){ .about-grid{ grid-template-columns: 1fr } }
+
+  .about-aside dt{
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+  .about-aside dd{
+    margin: 4px 0 18px;
+    color: var(--paper);
+    font-size: 14px;
+  }
+  .about-aside dd .em{ color: var(--ember) }
+
+  .about-body{
+    font-size: clamp(17px, 1.7vw, 21px);
+    line-height: 1.6;
+    color: var(--paper);
+    max-width: 64ch;
+  }
+  .about-body p + p{ margin-top: 1.1em }
+  .about-body em{
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--paper);
+  }
+  .about-body .hl{ color: var(--ember); font-style: normal; font-family: inherit }
+
+  /* ---------- STACK ---------- */
+  .stack{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  @media (max-width: 720px){ .stack{ grid-template-columns: 1fr } }
+  .stack-row{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 18px;
+    padding: 22px 24px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  @media (max-width: 520px){
+    .stack-row{ grid-template-columns: 1fr; gap: 6px; padding: 18px 18px }
+  }
+  .stack-label{
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    padding-top: 3px;
+  }
+  .stack-label::before{
+    content: "→ ";
+    color: var(--ember);
+  }
+  .stack-items{
+    font-size: 14.5px;
+    color: var(--paper);
+    line-height: 1.7;
+  }
+  .stack-items span{
+    display: inline-block;
+    margin-right: 14px;
+    white-space: nowrap;
+  }
+  .stack-items span::after{
+    content: "·";
+    margin-left: 14px;
+    color: var(--paper-mute);
+  }
+  .stack-items span:last-child::after{ content: "" }
+
+  /* ---------- EXPERIENCE timeline ---------- */
+  .xp{
+    display: grid;
+    gap: 0;
+  }
+  .xp-row{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(20px, 4vw, 56px);
+    padding: 36px 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+  .xp-row:last-child{ border-bottom: 1px solid var(--rule) }
+  @media (max-width: 700px){ .xp-row{ grid-template-columns: 1fr; gap: 14px } }
+  .xp-date{
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    padding-top: 8px;
+  }
+  .xp-date b{
+    display: block;
+    color: var(--ember);
+    font-weight: 500;
+    margin-bottom: 4px;
+    letter-spacing: 0.14em;
+  }
+  .xp-role{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+    color: var(--paper);
+  }
+  .xp-org{
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--paper-dim);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .xp-org b{ color: var(--paper); font-weight: 500 }
+  .xp-bullets{
+    list-style: none;
+    margin: 0; padding: 0;
+    display: grid;
+    gap: 12px;
+    max-width: 70ch;
+  }
+  .xp-bullets li{
+    position: relative;
+    padding-left: 22px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--paper);
+  }
+  .xp-bullets li::before{
+    content: "—";
+    position: absolute;
+    left: 0; top: 0;
+    color: var(--ember);
+  }
+
+  /* ---------- WORK / PROJECTS ---------- */
+  .work{
+    display: grid;
+    gap: 0;
+  }
+  .work-row{
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: clamp(16px, 3vw, 40px);
+    padding: 36px 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
+    align-items: start;
+    transition: background .25s ease;
+  }
+  .work-row:last-child{ border-bottom: 1px solid var(--rule) }
+  .work-row:hover{ background: rgba(255,87,34,0.025) }
+  .work-row:hover .work-title{ color: var(--ember) }
+  .work-row:hover .work-arrow{ transform: translate(4px,-4px); color: var(--ember) }
+
+  @media (max-width: 700px){
+    .work-row{ grid-template-columns: 50px 1fr; gap: 14px }
+    .work-arrow{ display:none }
+  }
+
+  .work-num{
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--paper-mute);
+    padding-top: 12px;
+  }
+  .work-title{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.0;
+    letter-spacing: -0.015em;
+    margin: 0;
+    color: var(--paper);
+    transition: color .2s ease;
+  }
+  .work-desc{
+    margin: 14px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--paper);
+    max-width: 70ch;
+  }
+  .work-stack{
+    margin: 16px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 6px;
+  }
+  .work-stack span{
+    display: inline-block;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    border: 1px solid var(--rule-strong);
+    padding: 4px 9px;
+    border-radius: 999px;
+  }
+  .work-arrow{
+    font-size: 28px;
+    color: var(--paper-mute);
+    padding-top: 8px;
+    transition: transform .25s ease, color .25s ease;
+    font-family: var(--mono);
+    line-height: 1;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    padding: clamp(80px, 12vw, 180px) 0 clamp(60px, 8vw, 100px);
+    border-bottom: 0;
+  }
+  .contact-eyebrow{
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    margin-bottom: 18px;
+  }
+  .contact-eyebrow::before{ content:"§"; color: var(--ember); margin-right: 8px }
+  .contact-headline{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(40px, 8.5vw, 128px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    margin: 0;
+    max-width: 18ch;
+  }
+  .contact-headline em{
+    font-style: italic;
+    color: var(--ember);
+  }
+  .contact-grid{
+    margin-top: clamp(36px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  @media (max-width: 800px){ .contact-grid{ grid-template-columns: repeat(2, minmax(0,1fr)) } }
+  @media (max-width: 480px){ .contact-grid{ grid-template-columns: 1fr } }
+  .contact-cell{
+    padding: 22px 22px 26px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--paper);
+    transition: background .2s ease, color .2s ease;
+  }
+  .contact-cell:hover{ background: var(--ember-soft); color: var(--ember) }
+  .contact-cell .label{
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+  .contact-cell .value{
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    word-break: break-all;
+  }
+  .contact-cell .arrow{
+    margin-top: 4px;
+    font-size: 18px;
+    color: var(--paper-mute);
+    transition: transform .25s ease, color .2s ease;
+  }
+  .contact-cell:hover .arrow{ color: var(--ember); transform: translate(4px,-4px) }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding: 28px var(--pad) 32px;
+    border-top: 1px solid var(--rule);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--paper-mute);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+  footer .prompt{ color: var(--paper) }
+  footer .prompt b{ color: var(--ember); font-weight: 500 }
+  @media (max-width: 560px){
+    footer{ grid-template-columns: 1fr }
+    footer .right{ text-align:left }
+  }
+
+  /* ---------- entrance animation ----------
+     CSS-only: every .reveal element starts hidden and animates in on page load.
+     This is robust: works without JS, in prerender, and at every scroll position.
+     Above-the-fold items are staggered via JS-set inline animation-delay (see <script>).
+  */
+  @keyframes rise{
+    from { opacity: 0; transform: translateY(14px) }
+    to   { opacity: 1; transform: none }
+  }
+  .reveal{
+    animation: rise .9s cubic-bezier(.2,.7,.2,1) both;
+  }
+  /* default stagger for hero/section heads — JS adds per-element delays too */
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ animation: none }
+    .hero-name .lo:last-child::after{ animation: none }
+    .bar .dot{ animation: none }
+  }
+
+  /* focus styles */
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--ember);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== TOP STATUS BAR ===================== -->
+<div class="bar" role="banner">
+  <div class="bar-inner">
+    <div class="left">
+      <span class="dot" aria-hidden="true"></span>
+      Available · Full-time · Toronto / Markham
+    </div>
+    <div class="center">
+      Maksym Syromolot — Full-Stack Developer
+    </div>
+    <div class="right" id="clock" aria-live="off">
+      —
+    </div>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="kicker reveal">
+        <span class="bracket">[</span>
+        <span>Portfolio · v2026.01</span>
+        <span class="bracket">]</span>
+      </div>
+
+      <h1 class="hero-name reveal">
+        <span class="lo">maksym</span>
+        <span class="lo">syromolot.</span>
+      </h1>
+
+      <p class="hero-tag reveal">
+        Full-stack developer shipping <em>Java</em>, <em>TypeScript</em> &amp; <em>React</em> —
+        from REST APIs and containerized services to interfaces that hold up in production.
+      </p>
+
+      <dl class="hero-meta reveal">
+        <div>
+          <dt>Location</dt>
+          <dd>Toronto, ON · CA</dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>Open to roles · May 2026</dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:maksymsyromolot@gmail.com">maksymsyromolot@gmail.com</a></dd>
+        </div>
+        <div>
+          <dt>Profiles</dt>
+          <dd>
+            <a href="https://github.com/maksymsyr" target="_blank" rel="noopener">GitHub</a>
+            <span style="color:var(--paper-mute); margin:0 8px">·</span>
+            <a href="https://www.linkedin.com/in/maksym-syromolot-b11552290/" target="_blank" rel="noopener">LinkedIn</a>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <aside class="ascii-panel reveal" aria-label="ASCII portrait, animated dark to bright">
+      <div class="ascii-frame">
+        <!--
+          DROP YOUR FILE HERE:
+          place `myphotogif.gif` in the same folder as index.html.
+          If you rename it, update the src below and the alt text.
+        -->
+        <img
+          src="myphotogif.gif"
+          alt="Animated ASCII self-portrait fading from dark to bright."
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+        />
+        <div class="ascii-fallback" style="display:none">
+          ASCII portrait<br>
+          <span>drop myphotogif.gif here</span>
+        </div>
+        <div class="ascii-scan" aria-hidden="true"></div>
+      </div>
+      <div class="ascii-caption">
+        <span class="id">FIG. 01</span>
+        <span class="rule" aria-hidden="true"></span>
+        <span>Self · Dark → Bright</span>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-num">§ 01 · About</div>
+        <h2 class="section-title" id="about-title">A short read.</h2>
+      </div>
+      <div class="section-meta">Profile / Summary</div>
+    </div>
+
+    <div class="about-grid">
+      <dl class="about-aside reveal" aria-label="At a glance">
+        <dt>Program</dt>
+        <dd>Computer Programming &amp; Analysis</dd>
+        <dt>School</dt>
+        <dd>Seneca Polytechnic · 2023&ndash;2026</dd>
+        <dt>GPA</dt>
+        <dd><span class="em">4.0</span> / 4.0</dd>
+        <dt>Focus</dt>
+        <dd>Backend services · APIs · Frontend</dd>
+        <dt>Tooling</dt>
+        <dd>Docker · Kubernetes · CI/CD · AWS</dd>
+      </dl>
+
+      <div class="about-body reveal">
+        <p>
+          I&rsquo;m a full-stack developer based in <span class="hl">Toronto</span> with hands-on experience
+          building and shipping Java and TypeScript / Node services, RESTful APIs, and React frontends.
+          I work comfortably in containerized cloud environments and CI/CD pipelines, and have a
+          background in <em>automated testing and production QA</em> at the Government of Ontario.
+        </p>
+        <p>
+          I like systems that are well-typed, well-tested, and well-documented &mdash; and interfaces that
+          stay calm under load. Recently I&rsquo;ve been integrating <span class="hl">LLM tool-calling</span> into
+          product workflows, designing schemas for structured outputs, and treating models as
+          dependable building blocks rather than novelty.
+        </p>
+        <p>
+          Graduating <em>May 2026</em> with a 4.0 GPA from Seneca Polytechnic. Available full-time in
+          Toronto &amp; Markham.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STACK ===================== -->
+<section id="stack" aria-labelledby="stack-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-num">§ 02 · Stack</div>
+        <h2 class="section-title" id="stack-title">Tools of the trade.</h2>
+      </div>
+      <div class="section-meta">Languages · Frameworks · Infra</div>
+    </div>
+
+    <div class="stack reveal">
+      <div class="stack-row">
+        <div class="stack-label">Languages</div>
+        <div class="stack-items">
+          <span>Java</span><span>TypeScript</span><span>JavaScript</span><span>Node.js</span><span>Python</span><span>SQL</span><span>Bash</span><span>C++</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label">Frontend</div>
+        <div class="stack-items">
+          <span>React</span><span>Next.js</span><span>HTML</span><span>CSS</span><span>MobX</span><span>REST</span><span>GraphQL</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label">Backend &amp; APIs</div>
+        <div class="stack-items">
+          <span>Spring</span><span>Express</span><span>RESTful design</span><span>JWT</span><span>OAuth 2.0</span><span>MongoDB</span><span>PostgreSQL</span><span>MySQL</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label">Testing</div>
+        <div class="stack-items">
+          <span>JUnit</span><span>Playwright</span><span>End-to-end pipelines</span><span>TDD</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label">Infrastructure</div>
+        <div class="stack-items">
+          <span>Docker</span><span>Kubernetes</span><span>AWS</span><span>GitHub Actions</span><span>Jenkins</span><span>CI/CD</span><span>Linux</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label">Other</div>
+        <div class="stack-items">
+          <span>LLM tool-calling</span><span>Structured outputs</span><span>Agile</span><span>Design patterns</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<section id="experience" aria-labelledby="xp-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-num">§ 03 · Experience</div>
+        <h2 class="section-title" id="xp-title">Where I&rsquo;ve built things.</h2>
+      </div>
+      <div class="section-meta">2024 — Present</div>
+    </div>
+
+    <ol class="xp" start="1">
+      <li class="xp-row reveal">
+        <div class="xp-date">
+          <b>2025</b>
+          May — Dec
+        </div>
+        <div>
+          <h3 class="xp-role">Associate Software Engineer</h3>
+          <div class="xp-org"><b>OpenPolicy</b> · Full-stack engineering</div>
+          <ul class="xp-bullets">
+            <li>Built and maintained full-stack features with TypeScript / Node backend services and RESTful APIs &mdash; the whole lifecycle, from design through deployment and monitoring.</li>
+            <li>Integrated third-party services end-to-end, enforced JWT-based security, and maintained well-documented API contracts; deployed containerized services to cloud infrastructure with Docker.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="xp-row reveal">
+        <div class="xp-date">
+          <b>2024 — 2025</b>
+          Sept — Apr
+        </div>
+        <div>
+          <h3 class="xp-role">QA Automation Tester</h3>
+          <div class="xp-org"><b>Ministry of Education, Govt. of Ontario</b> · Critical software</div>
+          <ul class="xp-bullets">
+            <li>Built and maintained automated end-to-end test pipelines in Playwright, integrated into CI/CD for critical government software &mdash; reducing defect escape rate and improving release confidence.</li>
+            <li>Designed test cases covering REST API edge cases; collaborated with developers on debugging, logging, and resolving integration failures in production-equivalent environments.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="xp-row reveal">
+        <div class="xp-date">
+          <b>2024 — Present</b>
+          Jun → Now
+        </div>
+        <div>
+          <h3 class="xp-role">Writer, Editor &amp; Organizer</h3>
+          <div class="xp-org"><b>Media Bober (NGO)</b> · <b>Student Union Priama Diia</b></div>
+          <ul class="xp-bullets">
+            <li>Authored technical guides on Linux, open-source tooling, and security practices.</li>
+            <li>Organized digital-literacy workshops for students and community members.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== SELECTED WORK ===================== -->
+<section id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-num">§ 04 · Selected Work</div>
+        <h2 class="section-title" id="work-title">Things I&rsquo;ve shipped.</h2>
+      </div>
+      <div class="section-meta">04 Projects</div>
+    </div>
+
+    <div class="work" role="list">
+      <a class="work-row reveal" role="listitem" href="https://github.com/Nerdy-Babushkas/scriptorium-frontend" target="_blank" rel="noopener">
+        <div class="work-num">01 /</div>
+        <div>
+          <h3 class="work-title">Scriptorium</h3>
+          <p class="work-desc">
+            Decoupled full-stack system with separate frontend and backend services. RESTful APIs for
+            authentication, media tracking, and gamification with JWT security. Integrated the
+            OpenRouter API for AI-driven content recommendations using <em>structured JSON outputs</em>
+            and tool calling. Maintained via GitHub Actions CI on an Agile branch-based workflow.
+          </p>
+          <div class="work-stack" aria-label="Tech stack">
+            <span>Java</span><span>Node.js</span><span>Express</span><span>React</span><span>MongoDB</span><span>OpenRouter API</span><span>Docker</span><span>GitHub Actions</span>
+          </div>
+        </div>
+        <div class="work-arrow" aria-hidden="true">↗</div>
+      </a>
+
+      <a class="work-row reveal" role="listitem" href="https://github.com/maksymsyr/art-explorer" target="_blank" rel="noopener">
+        <div class="work-num">02 /</div>
+        <div>
+          <h3 class="work-title">Art Explorer</h3>
+          <p class="work-desc">
+            Full-stack application with a React frontend and a REST API backend.
+            Implemented JWT auth and deployed via Vercel with environment-based configuration for
+            staging and production.
+          </p>
+          <div class="work-stack" aria-label="Tech stack">
+            <span>React</span><span>Next.js</span><span>Node.js</span><span>MongoDB</span><span>JWT</span><span>Vercel</span>
+          </div>
+        </div>
+        <div class="work-arrow" aria-hidden="true">↗</div>
+      </a>
+
+      <a class="work-row reveal" role="listitem" href="https://github.com/maksymsyr/hotel-reservation-app" target="_blank" rel="noopener">
+        <div class="work-num">03 /</div>
+        <div>
+          <h3 class="work-title">Hotel Reservation System</h3>
+          <p class="work-desc">
+            Full-stack desktop hotel reservation system using JavaFX and a 3-tier MVC architecture
+            (Presentation, Business, Data), with JPA / Hibernate ORM and MySQL. Implemented
+            <em>five design patterns</em> &mdash; Strategy, Observer, Factory, Decorator, Singleton &mdash; in a
+            production context. Includes a role-based admin module with BCrypt authentication, a
+            self-service booking kiosk with dynamic pricing, a payment subsystem (cash / card / loyalty),
+            and a waitlist using the Observer pattern for real-time availability notifications.
+          </p>
+          <div class="work-stack" aria-label="Tech stack">
+            <span>Java</span><span>JavaFX</span><span>JPA / Hibernate</span><span>MySQL</span><span>3-tier MVC</span><span>Design Patterns</span>
+          </div>
+        </div>
+        <div class="work-arrow" aria-hidden="true">↗</div>
+      </a>
+
+      <a class="work-row reveal" role="listitem" href="https://github.com/maksymsyr/DangerAlertDatabase" target="_blank" rel="noopener">
+        <div class="work-num">04 /</div>
+        <div>
+          <h3 class="work-title">DangerAlert</h3>
+          <p class="work-desc">
+            Led a team of three to design a normalized relational database schema for large-scale
+            dataset processing; produced operational query reports.
+          </p>
+          <div class="work-stack" aria-label="Tech stack">
+            <span>MySQL</span><span>Relational schema design</span><span>Team lead</span>
+          </div>
+        </div>
+        <div class="work-arrow" aria-hidden="true">↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="contact-eyebrow reveal">05 · Contact</div>
+    <h2 class="contact-headline reveal" id="contact-title">
+      Let&rsquo;s <em>build</em> something good.
+    </h2>
+
+    <div class="contact-grid reveal">
+      <a class="contact-cell" href="mailto:maksymsyromolot@gmail.com">
+        <span class="label">Email</span>
+        <span class="value">maksymsyromolot@gmail.com</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="contact-cell" href="tel:+16477664179">
+        <span class="label">Phone</span>
+        <span class="value">+1 (647) 766&ndash;4179</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="contact-cell" href="https://github.com/maksymsyr" target="_blank" rel="noopener">
+        <span class="label">GitHub</span>
+        <span class="value">github.com/maksymsyr</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="contact-cell" href="https://www.linkedin.com/in/maksym-syromolot-b11552290/" target="_blank" rel="noopener">
+        <span class="label">LinkedIn</span>
+        <span class="value">maksym-syromolot</span>
+        <span class="arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="prompt">
+    <b>~/maksym</b> $ thanks for reading.
+  </div>
+  <div class="right">
+    © <span id="year">2026</span> · Built with care
+  </div>
+</footer>
+
+<script>
+  // ---------- live clock in top bar ----------
+  (function(){
+    const el = document.getElementById('clock');
+    if (!el) return;
+    function tick(){
+      const now = new Date();
+      // Display in Toronto time regardless of viewer locale
+      const opts = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'America/Toronto' };
+      const t = new Intl.DateTimeFormat('en-CA', opts).format(now);
+      el.textContent = 'TOR · ' + t;
+    }
+    tick(); setInterval(tick, 1000);
+  })();
+
+  // ---------- footer year ----------
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------- stagger hero entrance ----------
+  (function(){
+    let i = 0;
+    document.querySelectorAll('.hero .reveal, .bar .reveal').forEach(el => {
+      el.style.animationDelay = (i * 80) + 'ms';
+      i++;
+    });
+  })();
+</script>
+
+</body>
+</html>
