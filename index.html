@@ -264,6 +264,21 @@
         }
       }
 
+      /* rain canvas */
+      #rain {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        opacity: 0.13;
+        z-index: 0;
+      }
+      .hero > * {
+        position: relative;
+        z-index: 1;
+      }
+
       /* ---------- HERO ---------- */
       .hero {
         padding: clamp(40px, 7vw, 88px) 0 clamp(56px, 8vw, 120px);
@@ -938,6 +953,116 @@
         transform: translate(4px, -4px);
       }
 
+      .contact-subline {
+        margin: clamp(16px, 2vw, 28px) 0 0;
+        font-size: clamp(15px, 1.5vw, 18px);
+        color: var(--paper-dim);
+        max-width: 68ch;
+        line-height: 1.65;
+      }
+      .contact-cell-icon {
+        font-size: 20px;
+        color: var(--ember);
+        line-height: 1;
+        font-family: var(--mono);
+        margin-bottom: 4px;
+      }
+      /* make the contact cells taller and more readable */
+      .contact-cell {
+        padding: 28px 24px 30px;
+      }
+      .contact-cell .value {
+        font-size: 15px;
+        word-break: break-all;
+      }
+
+      /* ---------- TERMINAL ---------- */
+      .terminal {
+        margin: clamp(28px, 4vw, 48px) 0 0;
+        border: 1px solid var(--rule-strong);
+        border-radius: 4px;
+        background: #07060505;
+        overflow: hidden;
+        max-width: 680px;
+        font-family: var(--mono);
+        font-size: 13.5px;
+      }
+      .terminal-bar {
+        background: var(--bg-elev);
+        border-bottom: 1px solid var(--rule);
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .t-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.85;
+      }
+      .terminal-title {
+        margin-left: 10px;
+        font-size: 11.5px;
+        letter-spacing: 0.1em;
+        color: var(--paper-mute);
+        text-transform: uppercase;
+      }
+      .terminal-body {
+        padding: 18px 20px 4px;
+        min-height: 48px;
+        display: grid;
+        gap: 6px;
+      }
+      .term-line {
+        display: flex;
+        gap: 10px;
+        line-height: 1.6;
+        color: var(--paper);
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .term-line.out {
+        color: var(--paper-dim);
+        padding-left: 22px;
+      }
+      .term-line.out.ember {
+        color: var(--ember);
+        padding-left: 22px;
+      }
+      .term-line.out.signal {
+        color: var(--signal);
+        padding-left: 22px;
+      }
+      .t-prompt {
+        color: var(--ember);
+        user-select: none;
+        flex-shrink: 0;
+      }
+      .t-cmd {
+        color: var(--paper);
+      }
+      .term-input-row {
+        display: flex;
+        gap: 10px;
+        padding: 4px 20px 18px;
+        align-items: center;
+      }
+      .term-input {
+        background: none;
+        border: none;
+        outline: none;
+        color: var(--paper);
+        font: inherit;
+        width: 100%;
+        caret-color: var(--ember);
+      }
+      .term-input::placeholder {
+        color: var(--paper-mute);
+        opacity: 0.6;
+      }
+
       /* ---------- FOOTER ---------- */
       footer {
         padding: 28px var(--pad) 32px;
@@ -1024,6 +1149,7 @@
 
     <!-- ===================== HERO ===================== -->
     <header class="hero">
+      <canvas id="rain" aria-hidden="true"></canvas>
       <div class="hero-grid">
         <div>
           <div class="kicker reveal">
@@ -1494,18 +1620,26 @@
     <!-- ===================== CONTACT ===================== -->
     <section id="contact" class="contact" aria-labelledby="contact-title">
       <div class="wrap">
-        <div class="contact-eyebrow reveal">05 · Contact</div>
+        <div class="contact-eyebrow reveal">§05 · Contact</div>
         <h2 class="contact-headline reveal" id="contact-title">
-          Let&rsquo;s <em>build</em> something good.
+          Let&rsquo;s <em>build</em><br />something good.
         </h2>
+
+        <p class="contact-subline reveal">
+          Open to full-time roles across the GTHA — Toronto, Markham,
+          Mississauga, Oakville, Hamilton, Vaughan &amp; Brampton. Drop a line,
+          reply within 24 h.
+        </p>
 
         <div class="contact-grid reveal">
           <a class="contact-cell" href="mailto:maksymsyromolot@gmail.com">
+            <span class="contact-cell-icon">✉</span>
             <span class="label">Email</span>
             <span class="value">maksymsyromolot@gmail.com</span>
             <span class="arrow">↗</span>
           </a>
           <a class="contact-cell" href="tel:+16477664179">
+            <span class="contact-cell-icon">☎</span>
             <span class="label">Phone</span>
             <span class="value">+1 (647) 766&ndash;4179</span>
             <span class="arrow">↗</span>
@@ -1516,6 +1650,7 @@
             target="_blank"
             rel="noopener"
           >
+            <span class="contact-cell-icon">&lt;/&gt;</span>
             <span class="label">GitHub</span>
             <span class="value">github.com/maksymsyr</span>
             <span class="arrow">↗</span>
@@ -1526,26 +1661,44 @@
             target="_blank"
             rel="noopener"
           >
+            <span class="contact-cell-icon">in</span>
             <span class="label">LinkedIn</span>
             <span class="value">maksym-syromolot</span>
             <span class="arrow">↗</span>
           </a>
         </div>
 
-        <pre
-          class="calling-card reveal"
-          aria-label="Calling card"
-        >┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│   <span class="ph">MAKSYM SYROMOLOT</span>                          <span class="pm">// est. 2026</span>    │
-│   <span class="pm">────────────────</span>                                          │
-│   <span class="pp">full-stack developer · java · typescript · react</span>          │
-│   <span class="pp">toronto · gtha · ontario · canada</span>                         │
-│                                                             │
-│   <span class="pm">$</span> <span class="ph">curl -L maksymsyromolot.dev</span>                             │
-│   <span class="pm">$</span> <span class="pp">echo "let's build something good"</span>                       │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘</pre>
+        <!-- interactive terminal easter egg -->
+        <div
+          class="terminal reveal"
+          id="terminal"
+          aria-label="Interactive terminal"
+        >
+          <div class="terminal-bar">
+            <span class="t-dot" style="background: #ff5f57"></span>
+            <span class="t-dot" style="background: #ffbd2e"></span>
+            <span class="t-dot" style="background: #28c840"></span>
+            <span class="terminal-title">maksym@portfolio ~ </span>
+          </div>
+          <div class="terminal-body" id="term-output">
+            <div class="term-line">
+              <span class="t-prompt">$</span>
+              <span class="t-cmd" id="term-boot"></span>
+            </div>
+          </div>
+          <div class="term-input-row" id="term-input-row" style="display: none">
+            <span class="t-prompt">$</span>
+            <input
+              class="term-input"
+              id="term-input"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="type 'help'"
+              aria-label="Terminal input"
+            />
+          </div>
+        </div>
 
         <pre class="ms-mark reveal" aria-hidden="true">
 ███╗   ███╗   ███████╗
@@ -1560,8 +1713,24 @@
 
     <!-- ===================== FOOTER ===================== -->
     <footer>
-      <div class="prompt"><b>~/maksym</b> $ thanks for reading.</div>
-      <div class="right">© <span id="year">2026</span> · Built with care</div>
+      <div class="prompt">
+        <b>~/maksym</b> $ thanks for reading<span
+          id="footer-cursor"
+          style="
+            color: var(--ember);
+            animation: blink 1.05s steps(2, end) infinite;
+          "
+          >_</span
+        >
+      </div>
+      <div class="right">
+        © <span id="year">2026</span> · Built with care ·
+        <span
+          id="uptime"
+          style="color: var(--paper-mute)"
+          title="Time you've spent on this page"
+        ></span>
+      </div>
     </footer>
 
     <script>
@@ -1571,7 +1740,6 @@
         if (!el) return;
         function tick() {
           const now = new Date();
-          // Display in Toronto time regardless of viewer locale
           const opts = {
             hour: "2-digit",
             minute: "2-digit",
@@ -1579,8 +1747,8 @@
             hour12: false,
             timeZone: "America/Toronto",
           };
-          const t = new Intl.DateTimeFormat("en-CA", opts).format(now);
-          el.textContent = "TOR · " + t;
+          el.textContent =
+            "TOR · " + new Intl.DateTimeFormat("en-CA", opts).format(now);
         }
         tick();
         setInterval(tick, 1000);
@@ -1588,6 +1756,20 @@
 
       // ---------- footer year ----------
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      // ---------- page uptime counter ----------
+      (function () {
+        const el = document.getElementById("uptime");
+        if (!el) return;
+        const start = Date.now();
+        setInterval(() => {
+          const s = Math.floor((Date.now() - start) / 1000);
+          el.textContent =
+            s < 60
+              ? s + "s on page"
+              : Math.floor(s / 60) + "m " + (s % 60) + "s on page";
+        }, 1000);
+      })();
 
       // ---------- stagger hero entrance ----------
       (function () {
@@ -1598,6 +1780,215 @@
             el.style.animationDelay = i * 80 + "ms";
             i++;
           });
+      })();
+
+      // ---------- IntersectionObserver scroll reveals ----------
+      (function () {
+        const items = document.querySelectorAll(
+          "section .reveal, footer .reveal",
+        );
+        if (!items.length) return;
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.style.animationPlayState = "running";
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+        items.forEach((el) => {
+          el.style.animationPlayState = "paused";
+          io.observe(el);
+        });
+      })();
+
+      // ---------- hero matrix rain ----------
+      (function () {
+        const canvas = document.getElementById("rain");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        const CHARS = "01アイウエオカキクケコJAVATSREACT{}[];()=>/*+|";
+        let cols, drops;
+
+        function resize() {
+          canvas.width = canvas.offsetWidth;
+          canvas.height = canvas.offsetHeight;
+          cols = Math.floor(canvas.width / 18);
+          drops = Array.from({ length: cols }, () => Math.random() * -40);
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        function draw() {
+          ctx.fillStyle = "rgba(10,9,8,0.18)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.font = "13px 'JetBrains Mono', monospace";
+          drops.forEach((y, i) => {
+            const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
+            // top char brighter (ember), rest green-ish
+            ctx.fillStyle = y < 2 ? "#ff7043" : "#d4e36b";
+            ctx.globalAlpha = y < 2 ? 0.9 : 0.4;
+            ctx.fillText(ch, i * 18 + 2, y * 18);
+            ctx.globalAlpha = 1;
+            if (y * 18 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            else drops[i] += 0.6;
+          });
+        }
+        setInterval(draw, 55);
+      })();
+
+      // ---------- cursor ember glow (desktop only) ----------
+      (function () {
+        if (window.matchMedia("(pointer: coarse)").matches) return;
+        const glow = document.createElement("div");
+        glow.style.cssText =
+          "position:fixed;width:300px;height:300px;pointer-events:none;z-index:200;border-radius:50%;background:radial-gradient(circle,rgba(255,87,34,0.07) 0%,transparent 70%);transform:translate(-50%,-50%);transition:left 0.12s ease,top 0.12s ease;";
+        document.body.appendChild(glow);
+        document.addEventListener("mousemove", (e) => {
+          glow.style.left = e.clientX + "px";
+          glow.style.top = e.clientY + "px";
+        });
+      })();
+
+      // ---------- interactive terminal ----------
+      (function () {
+        const output = document.getElementById("term-output");
+        const inputRow = document.getElementById("term-input-row");
+        const input = document.getElementById("term-input");
+        const bootEl = document.getElementById("term-boot");
+        if (!output || !input) return;
+
+        const COMMANDS = {
+          help: [
+            { text: "available commands:", cls: "signal" },
+            { text: "  whoami     — who is Maksym?", cls: "out" },
+            { text: "  stack      — tech stack summary", cls: "out" },
+            { text: "  hire       — why hire Maksym", cls: "out" },
+            { text: "  email      — copy email to clipboard", cls: "out" },
+            { text: "  clear      — clear terminal", cls: "out" },
+          ],
+          whoami: [
+            {
+              text: "Maksym Syromolot — full-stack developer, Toronto.",
+              cls: "out",
+            },
+            {
+              text: "Java · TypeScript · React · Node · Docker · AWS",
+              cls: "out",
+            },
+            { text: "4.0 GPA · Seneca Polytechnic · May 2026", cls: "out" },
+          ],
+          stack: [
+            {
+              text: "Languages  → Java, TypeScript, JS, Python, SQL, Bash, C++",
+              cls: "out",
+            },
+            {
+              text: "Frontend   → React, Next.js, HTML, CSS, MobX, GraphQL",
+              cls: "out",
+            },
+            {
+              text: "Backend    → Spring, Express, JWT, OAuth 2.0, Mongo, PG",
+              cls: "out",
+            },
+            {
+              text: "Infra      → Docker, K8s, AWS, GitHub Actions, Jenkins",
+              cls: "out",
+            },
+            {
+              text: "Testing    → JUnit, Playwright, TDD, E2E pipelines",
+              cls: "out",
+            },
+          ],
+          hire: [
+            {
+              text: "→ 4.0 GPA, shipped production code at OpenPolicy &",
+              cls: "ember",
+            },
+            {
+              text: "  the Ministry of Education, Govt of Ontario.",
+              cls: "ember",
+            },
+            {
+              text: "→ End-to-end ownership: design → deploy → monitor.",
+              cls: "out",
+            },
+            {
+              text: "→ Fast, typed, tested, documented. Available now.",
+              cls: "out",
+            },
+            { text: "→ mailto:maksymsyromolot@gmail.com", cls: "signal" },
+          ],
+          email: [{ text: "copying to clipboard...", cls: "out" }],
+          clear: null,
+        };
+
+        function addLine(text, cls = "") {
+          const div = document.createElement("div");
+          div.className = "term-line" + (cls ? " " + cls : "");
+          div.textContent = text;
+          output.appendChild(div);
+        }
+
+        function addCmdLine(cmd) {
+          const div = document.createElement("div");
+          div.className = "term-line";
+          div.innerHTML = `<span class="t-prompt">$</span> <span class="t-cmd">${cmd}</span>`;
+          output.appendChild(div);
+        }
+
+        function scrollBottom() {
+          const term = document.getElementById("terminal");
+          if (term) term.scrollTop = term.scrollHeight;
+        }
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key !== "Enter") return;
+          const cmd = input.value.trim().toLowerCase();
+          input.value = "";
+          if (!cmd) return;
+          addCmdLine(cmd);
+
+          if (cmd === "clear") {
+            output.innerHTML = "";
+            scrollBottom();
+            return;
+          }
+          const resp = COMMANDS[cmd];
+          if (resp) {
+            resp.forEach((line) => addLine(line.text, line.cls));
+            if (cmd === "email") {
+              navigator.clipboard
+                .writeText("maksymsyromolot@gmail.com")
+                .catch(() => {});
+              addLine("✓ maksymsyromolot@gmail.com", "signal");
+            }
+          } else {
+            addLine(`command not found: ${cmd}. type 'help'`, "out");
+          }
+          scrollBottom();
+        });
+
+        // boot sequence typewriter
+        const bootMsg = "whoami";
+        let bi = 0;
+        const bootInterval = setInterval(() => {
+          bootEl.textContent = bootMsg.slice(0, ++bi);
+          if (bi >= bootMsg.length) {
+            clearInterval(bootInterval);
+            setTimeout(() => {
+              // auto-run whoami output
+              COMMANDS.whoami.forEach((l) => addLine(l.text, l.cls));
+              addLine("", "out");
+              addLine("type 'help' for more commands", "out");
+              inputRow.style.display = "flex";
+              scrollBottom();
+            }, 350);
+          }
+        }, 80);
       })();
     </script>
   </body>
