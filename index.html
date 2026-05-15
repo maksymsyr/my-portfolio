@@ -1500,7 +1500,7 @@
             <span>·</span>
             <span class="sn-name">Selected Work</span>
             <span class="sn-rule" aria-hidden="true"></span>
-            <span class="sn-meta">04 projects · ↗ links</span>
+            <span class="sn-meta">05 projects · ↗ links</span>
             <span class="sn-bracket">─┐</span>
           </div>
           <h2 class="section-title" id="work-title">
@@ -1512,11 +1512,45 @@
           <a
             class="work-row reveal"
             role="listitem"
-            href="https://github.com/Nerdy-Babushkas/scriptorium-frontend"
+            href="https://github.com/maksymsyr/job-hunter-agent"
             target="_blank"
             rel="noopener"
           >
             <div class="work-num">01 /</div>
+            <div>
+              <h3 class="work-title">Job Hunter Agent</h3>
+              <p class="work-desc">
+                LLM-powered career intelligence pipeline that turns a folder of
+                job-posting PDFs and a resume into actionable market analysis, a
+                triaged skill-gap report, and tailored application packages —
+                all from the command line. Runs in three phases:
+                <em>market extraction</em>
+                (PDFs → structured JSON + company research via autonomous
+                tool-calling),
+                <em>resume gap analysis</em> (vs. aggregated market data), and
+                <em>application advisor</em> (fit score, resume rewrite, three
+                cover-letter variants, visual HTML report with Chart.js gauges).
+                Built with Pydantic schema validation, idempotent SHA-1 caching,
+                and a structured debug-logging layer across 13 source files.
+              </p>
+              <div class="work-stack" aria-label="Tech stack">
+                <span>Python</span><span>OpenRouter API</span
+                ><span>LLM Tool-Calling</span><span>Pydantic</span
+                ><span>Tavily</span><span>pdfplumber</span><span>Chart.js</span
+                ><span>CLI</span>
+              </div>
+            </div>
+            <div class="work-arrow" aria-hidden="true">↗</div>
+          </a>
+
+          <a
+            class="work-row reveal"
+            role="listitem"
+            href="https://github.com/Nerdy-Babushkas/scriptorium-frontend"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="work-num">02 /</div>
             <div>
               <h3 class="work-title">Scriptorium</h3>
               <p class="work-desc">
@@ -1545,7 +1579,7 @@
             target="_blank"
             rel="noopener"
           >
-            <div class="work-num">02 /</div>
+            <div class="work-num">03 /</div>
             <div>
               <h3 class="work-title">Art Explorer</h3>
               <p class="work-desc">
@@ -1568,7 +1602,7 @@
             target="_blank"
             rel="noopener"
           >
-            <div class="work-num">03 /</div>
+            <div class="work-num">04 /</div>
             <div>
               <h3 class="work-title">Hotel Reservation System</h3>
               <p class="work-desc">
@@ -1598,7 +1632,7 @@
             target="_blank"
             rel="noopener"
           >
-            <div class="work-num">04 /</div>
+            <div class="work-num">05 /</div>
             <div>
               <h3 class="work-title">DangerAlert</h3>
               <p class="work-desc">
@@ -1867,6 +1901,7 @@
             { text: "  whoami     — who is Maksym?", cls: "out" },
             { text: "  stack      — tech stack summary", cls: "out" },
             { text: "  hire       — why hire Maksym", cls: "out" },
+            { text: "  projects   — featured projects", cls: "out" },
             { text: "  email      — copy email to clipboard", cls: "out" },
             { text: "  clear      — clear terminal", cls: "out" },
           ],
@@ -1921,6 +1956,33 @@
               cls: "out",
             },
             { text: "→ mailto:maksymsyromolot@gmail.com", cls: "signal" },
+          ],
+          projects: [
+            {
+              text: "01 / Job Hunter Agent  — LLM pipeline: PDF→market report,",
+              cls: "out",
+            },
+            {
+              text: "                         gap analysis, fit score, cover letters",
+              cls: "out",
+            },
+            {
+              text: "02 / Scriptorium       — full-stack media tracker + AI recommendations",
+              cls: "out",
+            },
+            {
+              text: "03 / Art Explorer      — React/Next.js + JWT + Vercel deployment",
+              cls: "out",
+            },
+            {
+              text: "04 / Hotel Reservation — JavaFX, 5 design patterns, dynamic pricing",
+              cls: "out",
+            },
+            {
+              text: "05 / DangerAlert DB    — team-led relational schema design",
+              cls: "out",
+            },
+            { text: "→ github.com/maksymsyr", cls: "signal" },
           ],
           email: [{ text: "copying to clipboard...", cls: "out" }],
           clear: null,
